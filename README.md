@@ -4,4 +4,4 @@
 Remote file streaming module
 
 ### `GET`:
-* `...?url=<String>` - streams resource, specified in `url`
+* `/?url=<String>` - streams resource, specified in `url`
