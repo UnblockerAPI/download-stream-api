@@ -36,18 +36,15 @@ app.get('/', async (req, res) => {
         }
 
         let contentTypeHeaderExists = headers.hasOwnProperty('content-type');
-        let contentLengthHeaderExists = headers.hasOwnProperty('content-length');
 
-        if (contentTypeHeaderExists && contentLengthHeaderExists) {
+        if (contentTypeHeaderExists) {
             let contentType = headers["content-type"];
-            let contentLength = headers["content-length"];
 
             let filename = 'download.' + ( mime.extension(contentType) || 'unknown' );
 
             res.status(200);
             res.set({
                 'Content-Type': contentType,
-                'Content-Length': contentLength,
                 'Content-Disposition': `attachment; filename=${filename}`
             });
 
