@@ -1,2 +1,7 @@
 # download-stream-api
-Download streaming module [proxy usage]
+> Part of Unblocker project
+
+Remote file streaming module
+
+### `GET`:
+* `...?url=<String>` - streams resource, specified in `url`
