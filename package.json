@@ -1,0 +1,35 @@
+{
+  "name": "download-stream-api",
+  "version": "1.0.0",
+  "description": "Download streaming module [proxy usage]",
+  "main": "index.js",
+  "scripts": {
+    "start": "bin/start-nginx cross-env NODE_ENV=production node pm2.js",
+    "dev": "node pm2.js",
+    "postinstall": "npm ddp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UnblockerAPI/download-stream-api.git"
+  },
+  "keywords": [
+    "stream",
+    "download",
+    "proxy"
+  ],
+  "author": "Marise Hayashi <@limitedeternity> (https://limitedeternity.github.io/)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/UnblockerAPI/download-stream-api/issues"
+  },
+  "homepage": "https://github.com/UnblockerAPI/download-stream-api#readme",
+  "dependencies": {
+    "compression": "^1.7.3",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.3",
+    "helmet": "^3.12.1",
+    "mime-types": "^2.1.19",
+    "pm2": "^3.0.0",
+    "request": "^2.87.0"
+  }
+}
