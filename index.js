@@ -27,7 +27,7 @@ app.use(compression());
 
 app.get('/', async (req, res) => {
     try {
-        let targetUrl = new URL(req.query.url);
+        let targetUrl = new URL(Buffer.from(req.query.url, 'base64').toString('ascii'));
 
         let { isOk, headers } = await utils.checkAvailability({ url: targetUrl.href });
 

@@ -4,4 +4,4 @@
 Remote file streaming module
 
 ### `GET`:
-* `/?url=<String>` - streams resource, specified in `url`
+* `/?url=<String>` - where `url` is **Base64** encoded url. Streams resource, specified in `url`
