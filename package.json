@@ -23,16 +23,16 @@
     "url": "https://github.com/UnblockerAPI/download-stream-api/issues"
   },
   "engines": {
-    "node": "10.6.0",
-    "npm": "6.2.0"
+    "node": "10.7.0",
+    "npm": "6.3.0"
   },
   "homepage": "https://github.com/UnblockerAPI/download-stream-api#readme",
   "dependencies": {
     "compression": "^1.7.3",
     "cross-env": "^5.2.0",
     "express": "^4.16.3",
-    "helmet": "^3.12.1",
+    "helmet": "^3.13.0",
     "mime-types": "^2.1.19",
-    "request": "^2.87.0"
+    "request": "^2.88.0"
   }
 }
