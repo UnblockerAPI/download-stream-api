@@ -29,7 +29,7 @@ app.get('/', async (req, res) => {
     try {
         let targetUrl = new URL(Buffer.from(req.query.url, 'base64').toString('ascii'));
 
-        let { isOk, headers } = await utils.checkAvailability({ url: targetUrl.href });
+        let { isOk, headers } = await utils.checkAvailability(targetUrl.href);
 
         if (!isOk) {
             return res.status(400).json({ success: false, reason: "Non200StatusCode" });
@@ -48,7 +48,13 @@ app.get('/', async (req, res) => {
                 'Content-Disposition': `attachment; filename=${filename}`
             });
 
-            return request({ method: 'GET', uri: targetUrl.href }).pipe(res);
+            return request({
+                method: 'GET',
+                uri: targetUrl.href,
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3563.0 Safari/537.36'
+                }
+             }).pipe(res);
 
         } else {
             return res.status(400).json({ success: false, reason: "NoValidHeaders" });
