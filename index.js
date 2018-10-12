@@ -2,7 +2,6 @@ const express = require('express');
 const compression = require('compression');
 const helmet = require('helmet');
 const fs = require('fs');
-const request = require('request');
 const mime = require('mime-types');
 
 
@@ -30,35 +29,20 @@ app.get('/', async (req, res) => {
         let targetUrl = new URL(Buffer.from(req.query.url, 'base64').toString('ascii'));
 
         let { isOk, headers } = await utils.checkAvailability(targetUrl.href);
-
         if (!isOk) {
             return res.status(400).json({ success: false, reason: "Non200StatusCode" });
         }
 
-        let contentTypeHeaderExists = headers.hasOwnProperty('content-type');
+        let contentType = headers["content-type"] || 'application/octet-stream';
+        let filename = 'download.' + ( mime.extension(contentType) || 'bin' );
 
-        if (contentTypeHeaderExists) {
-            let contentType = headers["content-type"];
+        res.status(200);
+        res.set({
+            'Content-Type': contentType,
+            'Content-Disposition': `attachment; filename="${filename}"`
+        });
 
-            let filename = 'download.' + ( mime.extension(contentType) || 'unknown' );
-
-            res.status(200);
-            res.set({
-                'Content-Type': contentType,
-                'Content-Disposition': `attachment; filename=${filename}`
-            });
-
-            return request({
-                method: 'GET',
-                uri: targetUrl.href,
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3563.0 Safari/537.36'
-                }
-             }).pipe(res);
-
-        } else {
-            return res.status(400).json({ success: false, reason: "NoValidHeaders" });
-        }
+        return utils.streamFile({ writableStream: res, file: targetUrl.href });
 
     } catch (e) {
         return res.status(400).json({ success: false, reason: "InvalidURL" });
