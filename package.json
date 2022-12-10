@@ -30,7 +30,7 @@
   "dependencies": {
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "helmet": "^4.4.1",
     "mime-types": "^2.1.30",
     "request": "^2.88.2"
